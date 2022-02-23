@@ -111,7 +111,7 @@
                             <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                             <li><a href="<?php echo site_url('admin/pasien') ?>"><i class="fa fa-user"></i> <span>List Pasien</span></a></li>
                             <li><a href="<?php echo site_url('admin/makanan') ?>"><i class="fa fa-circle"></i> <span>List Makanan</span></a></li>
-                            <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-gears"></i> <span>Manajemen Output</span></a></li>
+                            <!-- <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-gears"></i> <span>Manajemen Output</span></a></li> -->
                             <li class="header">Pengaturan Sistem</li>
                             <li class="treeview">
                                 <a href="#"> <i class="fa fa-list"></i> <span>Profil Sistem</span>

@@ -56,43 +56,63 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Baru</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Menu Makanan Baru</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
                                 </div>
-                                <?php echo form_open("admin/user/create") ?>
+                                <?php echo form_open("admin/makanan/create") ?>
+
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for=""><b style="color: black">Nama User <span style="color:red">*</span></b></label>
-                                        <?php echo csrf(); ?>
-                                        <input type="text" class="form-control" placeholder="Nama User/Fullname" name="user_fullname" required="required">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""><b style="color: black">Email <span style="color:red">*</span></b></label>
-                                        <input type="email" class="form-control" placeholder="Email User" name="user_email" required="required">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""><b style="color: black">Group <span style="color:red">*</span></b></label>
-                                        <select class="form-control" name="group_id" required>
-                                            <option value="">- Pilih Group -</option>
+                                        <label for=""><b style="color: black">Jenis Menu <span style="color:red">*</span></b></label>
+                                        <select class="form-control" name="category_food_id" required>
+                                            <option value="">- Pilih Jenis Menu -</option>
                                             <?php
-                                            foreach ($group as $g) {
-                                                echo '<option value="' . $g->group_id . '">' . $g->group_name . '</option>';
+                                            foreach ($category_food as $g) {
+                                                echo '<option value="' . $g->category_food_id . '">' . $g->category_food_name . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
                                     <hr style="border: 0.5px dashed #d2d6de">
                                     <div class="form-group">
-                                        <label for=""><b style="color: black">Username <span style="color:red">*</span></b></label>
-                                        <input type="text" class="form-control" placeholder="Username" name="user_name" required="required">
+                                        <label for=""><b style="color: black"> Menu Pagi <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="text" class="form-control" placeholder="Menu Makanan Pagi" name="food_name" required="required">
                                     </div>
                                     <div class="form-group">
-                                        <label for=""><b style="color: black">Password <span style="color:red">*</span></b></label>
-                                        <input type="password" class="form-control" placeholder="Password" name="user_password" required="required">
+                                        <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal" required="required">
                                     </div>
-
+                                    <hr style="border: 0.5px dashed #d2d6de">
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black"> Menu Siang <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="text" class="form-control" placeholder="Menu Makanan Siang" name="food_name2" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal2" required="required">
+                                    </div>
+                                    <hr style="border: 0.5px dashed #d2d6de">
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black"> Menu Malam <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="text" class="form-control" placeholder="Menu Makanan Malam" name="food_name3" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                        <?php echo csrf(); ?>
+                                        <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal3" required="required">
+                                    </div>
+                                    <hr style="border: 0.5px dashed #d2d6de">
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black">Keterangan <span style="color:red">*</span></b></label>
+                                        <input type="text" class="form-control" placeholder="Keterangan" name="food_details">
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary font-weight-bold">Simpan</button>
@@ -117,11 +137,13 @@
                 <table class="table table-bordered">
                     <tr style="background-color: gray;color:white">
                         <th style="width: 60px">No</th>
-                        <th style="width: 11%">Jenis Menu Makanan</th>
-                        <th>List Makanan</th>
-                        <th>Total Kkal</th>
+                        <th style="width: 8%">Jenis Menu</th>
+                        <th>Menu Pagi (Kkal)</th>
+                        <th>Menu Siang (Kkal)</th>
+                        <th>Menu Malam (Kkal)</th>
+                        <th>Total (Kkal)</th>
                         <th>Keterangan</th>
-                        <th style="width: 20%">#aksi</th>
+                        <th style="width: 14%">#aksi</th>
                     </tr>
                     <?php
                     if ($food) {
@@ -133,18 +155,20 @@
                             <tr>
                                 <td><?php echo $no + $numbers; ?></td>
                                 <td><?php echo $key->category_food_name; ?></td>
-                                <td><?php echo $key->food_name; ?></td>
-                                <td><?php echo $key->food_kkal; ?></td>
+                                <td><?php echo $key->food_name; ?> <b>(<?php echo $key->food_kkal; ?>)</b></td>
+                                <td><?php echo $key->food_name2; ?> <b>(<?php echo $key->food_kkal2; ?>)</b></td>
+                                <td><?php echo $key->food_name3; ?> <b>(<?php echo $key->food_kkal3; ?>)</b></td>
+                                <td><b><?php echo $key->food_kkal + $key->food_kkal2 + $key->food_kkal3; ?></b></td>
                                 <td><?php echo $key->food_details; ?></td>
                                 <td>
-                                    <button class="btn btn-xs btn-flat btn-info" data-toggle="modal" data-target="#modalDetail<?php echo $key->food_id; ?>">detail</button>
+                                    <!-- <button class="btn btn-xs btn-flat btn-info" data-toggle="modal" data-target="#modalDetail<?php echo $key->food_id; ?>">detail</button> -->
                                     <button class="btn btn-xs btn-flat btn-warning" data-toggle="modal" data-target="#modalUpdate<?php echo $key->food_id; ?>">update</button>
                                     <button class="btn btn-xs btn-flat btn-danger" data-toggle="modal" data-target="#modalDelete<?php echo $key->food_id ?>">hapus</button>
                                 </td>
                             </tr>
 
                             <!-- Modal Update-->
-                            <div class="modal fade" id="modalUpdate<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <div class="modal fade" id="modalUpdate<?php echo $key->food_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -153,28 +177,19 @@
                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                             </button>
                                         </div>
-                                        <?php echo form_open("admin/user/update") ?>
+                                        <?php echo form_open("admin/makanan/update") ?>
                                         <div class="modal-body">
+                                            <input type="hidden" class="form-control" name="food_id" required="required" value="<?php echo $key->food_id; ?>">
                                             <div class="form-group">
-                                                <label for=""><b style="color: black">Nama User <span style="color:red">*</span></b></label>
-                                                <?php echo csrf(); ?>
-                                                <input type="text" class="form-control" placeholder="Nama User/Fullname" name="user_fullname" required="required" value="<?php echo $key->user_fullname; ?>">
-                                                <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key->user_id; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for=""><b style="color: black">Email <span style="color:red">*</span></b></label>
-                                                <input type="email" class="form-control" placeholder="Email User" name="user_email" required="required" value="<?php echo $key->user_email; ?>">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for=""><b style="color: black">Group <span style="color:red">*</span></b></label>
-                                                <select class="form-control" name="group_id" required>
-                                                    <option value="">- Pilih Group -</option>
+                                                <label for=""><b style="color: black">Jenis Menu <span style="color:red">*</span></b></label>
+                                                <select class="form-control" name="category_food_id" required>
+                                                    <option value="">- Pilih Jenis Menu -</option>
                                                     <?php
-                                                    foreach ($group as $g) {
-                                                        if ($key->group_id == $g->group_id) {
-                                                            echo '<option value="' . $g->group_id . '" selected>' . $g->group_name . '</option>';
+                                                    foreach ($category_food as $g) {
+                                                        if ($key->category_food_id == $g->category_food_id) {
+                                                            echo '<option value="' . $g->category_food_id . '" selected>' . $g->category_food_name . '</option>';
                                                         } else {
-                                                            echo '<option value="' . $g->group_id . '">' . $g->group_name . '</option>';
+                                                            echo '<option value="' . $g->category_food_id . '">' . $g->category_food_name . '</option>';
                                                         }
                                                     }
                                                     ?>
@@ -182,13 +197,43 @@
                                             </div>
                                             <hr style="border: 0.5px dashed #d2d6de">
                                             <div class="form-group">
-                                                <label for=""><b style="color: black">Username <span style="color:red">*</span></b></label>
-                                                <input type="text" class="form-control" placeholder="Username" name="user_name" required="required" value="<?php echo $key->user_name; ?>">
+                                                <label for=""><b style="color: black"> Menu Pagi <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="text" class="form-control" placeholder="Menu Makanan Pagi" name="food_name" required="required" value="<?php echo $key->food_name ?>">
                                             </div>
                                             <div class="form-group">
-                                                <label for=""><b style="color: black">Password <span style="color:red">*</span></b><br><small style="color:red"><i>Kosongkan jika tidak ingin mengubah password</i></small></b></label>
-                                                <input type="password" class="form-control" placeholder="Password" name="user_password">
+                                                <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal" required="required" value="<?php echo $key->food_kkal ?>">
                                             </div>
+                                            <hr style="border: 0.5px dashed #d2d6de">
+                                            <div class="form-group">
+                                                <label for=""><b style="color: black"> Menu Siang <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="text" class="form-control" placeholder="Menu Makanan Siang" name="food_name2" required="required" value="<?php echo $key->food_name2 ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal2" required="required" value="<?php echo $key->food_kkal2 ?>">
+                                            </div>
+                                            <hr style="border: 0.5px dashed #d2d6de">
+                                            <div class="form-group">
+                                                <label for=""><b style="color: black"> Menu Malam <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="text" class="form-control" placeholder="Menu Makanan Malam" name="food_name3" required="required" value="<?php echo $key->food_name3 ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for=""><b style="color: black"> Jumlah Kalori <span style="color:red">*</span></b></label>
+                                                <?php echo csrf(); ?>
+                                                <input type="number" class="form-control" placeholder="Jumlah Kalori" name="food_kkal3" required="required" value="<?php echo $key->food_kkal3 ?>">
+                                            </div>
+                                            <hr style="border: 0.5px dashed #d2d6de">
+                                            <div class="form-group">
+                                                <label for=""><b style="color: black">Keterangan <span style="color:red">*</span></b></label>
+                                                <input type="text" class="form-control" placeholder="Keterangan" name="food_details" value="<?php echo $key->food_details ?>">
+                                            </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-warning font-weight-bold">Update</button>
@@ -200,7 +245,7 @@
                             </div>
 
                             <!-- Modal Delete-->
-                            <div class="modal fade" id="modalDelete<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <div class="modal fade" id="modalDelete<?php echo $key->food_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -209,12 +254,12 @@
                                                 <i aria-hidden="true" class="ki ki-close"></i>
                                             </button>
                                         </div>
-                                        <?php echo form_open("admin/user/delete") ?>
+                                        <?php echo form_open("admin/makanan/delete") ?>
                                         <div class="modal-body">
-                                            Apakah anda yakin akan menghapus data user : <?php echo $key->user_name; ?> ?
+                                            Apakah anda yakin akan menghapus data makanan : <?php echo $key->food_name; ?> ?
                                             <?php echo csrf(); ?>
-                                            <input type="hidden" class="form-control" placeholder="Nama user" name="user_name" required="required" value="<?php echo $key->user_name; ?>">
-                                            <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key->user_id; ?>">
+                                            <input type="hidden" class="form-control" placeholder="Nama user" name="user_name" required="required" value="<?php echo $key->food_name; ?>">
+                                            <input type="hidden" class="form-control" name="food_id" required="required" value="<?php echo $key->food_id; ?>">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-danger font-weight-bold">Hapus</button>
@@ -226,7 +271,7 @@
                             </div>
 
                             <!-- Modal Detail-->
-                            <div class="modal fade" id="modalDetail<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <!-- <div class="modal fade" id="modalDetail<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -248,7 +293,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                     <?php
@@ -256,10 +301,10 @@
                         }
                     } else {
                         echo '
-                                        <tr>
-                                            <td colspan="3">Tidak ada ditemukan</td>
-                                        </tr>
-                                        ';
+                        <tr>
+                            <td colspan="3">Tidak ada ditemukan</td>
+                        </tr>
+                        ';
                     }
                     ?>
 

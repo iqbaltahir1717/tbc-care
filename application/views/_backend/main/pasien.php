@@ -36,7 +36,7 @@
 
                         </select>
                         <div class="input-group margin">
-                            <?php echo form_open("admin/user/search") ?>
+                            <?php echo form_open("admin/pasien/search") ?>
                             <input type="text" class="form-control" name="key" placeholder="Masukkan kata kunci pencarian">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-danger btn-flat">cari</button>
@@ -73,43 +73,43 @@
                         <th style="width: 15%">#aksi</th>
                     </tr>
                     <?php
-                    if ($pasien) {
+                    if ($data) {
                         $nox = 1;
                         $no = 1;
-                        foreach ($pasien as $key) {
+                        foreach ($data as $ab => $key) {
 
                     ?>
                             <tr>
                                 <td><?php echo $no + $numbers; ?></td>
-                                <td><?php echo $key->user_fullname; ?></td>
+                                <td><?php echo $key[1]; ?></td>
 
                                 <td>
-                                    <?php if ("W" == $key->user_gender) {
+                                    <?php if ("W" == $key[2]) {
                                         echo "Perempuan";
                                     }
-                                    if ("L" == $key->user_gender) {
+                                    if ("L" == $key[2]) {
                                         echo "Laki-Laki";
                                     } ?>
                                 </td>
                                 <td>
                                     <?php
-                                    $tanggal = new  DateTime($key->user_birth);
+                                    $tanggal = new  DateTime($key[3]);
                                     $today = new DateTime('today');
                                     $y = $today->diff($tanggal)->y;
 
                                     echo $y;
                                     ?></td>
-                                <td><?php echo $key->user_bb; ?></td>
-                                <td><?php echo $key->user_tb; ?></td>
-                                <td><?php echo $key->user_status; ?></td>
+                                <td><?php echo $key[4]; ?></td>
+                                <td><?php echo $key[5]; ?></td>
+                                <td><?php echo $key[6]; ?></td>
                                 <td>
-                                    <button class="btn btn-xs btn-flat btn-info" data-toggle="modal" data-target="#modalDetail<?php echo $key->user_id; ?>">detail</button>
-                                    <button class="btn btn-xs btn-flat btn-warning" data-toggle="modal" data-target="#modalUpdate<?php echo $key->user_id; ?>">update</button>
+                                    <button class="btn btn-xs btn-flat btn-info" data-toggle="modal" data-target="#modalDetail<?php echo $key[0]; ?>">detail</button>
+                                    <button class="btn btn-xs btn-flat btn-warning" data-toggle="modal" data-target="#modalUpdate<?php echo $key[0]; ?>">update</button>
                                 </td>
                             </tr>
 
                             <!-- Modal Update-->
-                            <div class="modal fade" id="modalUpdate<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <div class="modal fade" id="modalUpdate<?php echo $key[0] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -123,8 +123,8 @@
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">Nama Pasien <span style="color:red">*</span></b></label>
                                                 <?php echo csrf(); ?>
-                                                <input type="text" class="form-control" placeholder="Nama Lengkap" name="user_fullname" required="required" value="<?php echo $key->user_fullname; ?>">
-                                                <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key->user_id; ?>">
+                                                <input type="text" class="form-control" placeholder="Nama Lengkap" name="user_fullname" required="required" value="<?php echo $key[1]; ?>">
+                                                <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key[0]; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">Status <span style="color:red">*</span></b></label>
@@ -133,7 +133,7 @@
                                                     <?php
                                                     $rowpage = array('Masa Pengobatan', 'Selesai');
                                                     for ($r = 0; $r < count($rowpage); $r++) {
-                                                        if ($rowpage[$r] == $key->user_status) {
+                                                        if ($rowpage[$r] == $key[6]) {
                                                             echo '<option value="' . $rowpage[$r] . '" selected>' . $rowpage[$r] . '</option>';
                                                         } else {
                                                             echo '<option value="' . $rowpage[$r] . '">' . $rowpage[$r] . '</option>';
@@ -149,7 +149,7 @@
                                                     <?php
                                                     $rowpage = array('Sangat Ringan', 'Ringan', 'Sedang', 'Berat', 'Sangat Berat');
                                                     for ($r = 0; $r < count($rowpage); $r++) {
-                                                        if ($rowpage[$r] == $key->user_activity) {
+                                                        if ($rowpage[$r] == $key[9]) {
                                                             echo '<option value="' . $rowpage[$r] . '" selected>' . $rowpage[$r] . '</option>';
                                                         } else {
                                                             echo '<option value="' . $rowpage[$r] . '">' . $rowpage[$r] . '</option>';
@@ -163,14 +163,14 @@
                                                     <div class="form-group">
                                                         <label for=""><b style="color: black">Berat Badan Pasien (kg) <span style="color:red">*</span></b></label>
                                                         <?php echo csrf(); ?>
-                                                        <input type="text" class="form-control" placeholder="Berat Badan (kg)" name="user_bb" required="required" value="<?php echo $key->user_bb; ?>">
+                                                        <input type="text" class="form-control" placeholder="Berat Badan (kg)" name="user_bb" required="required" value="<?php echo $key[4]; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for=""><b style="color: black">Tinggi Badan Pasien (cm)<span style="color:red">*</span></b></label>
                                                         <?php echo csrf(); ?>
-                                                        <input type="text" class="form-control" placeholder="Berat Badan (cm)" name="user_tb" required="required" value="<?php echo $key->user_tb; ?>">
+                                                        <input type="text" class="form-control" placeholder="Berat Badan (cm)" name="user_tb" required="required" value="<?php echo $key[5]; ?>">
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,7 +178,7 @@
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">Tanggal Lahir<span style="color:red">*</span></b></label>
                                                 <?php echo csrf(); ?>
-                                                <input type="date" class="form-control" placeholder="" name="user_birth" required="required" value="<?php echo $key->user_birth; ?>">
+                                                <input type="date" class="form-control" placeholder="" name="user_birth" required="required" value="<?php echo $key[3]; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">Jenis Kelamin <span style="color:red">*</span></b></label>
@@ -187,7 +187,7 @@
                                                     <?php
                                                     $rowpage = array('L', 'W');
                                                     for ($r = 0; $r < count($rowpage); $r++) {
-                                                        if ($rowpage[$r] == $key->user_gender) {
+                                                        if ($rowpage[$r] == $key[2]) {
                                                             echo '<option value="' . $rowpage[$r] . '" selected>' . $rowpage[$r] . '</option>';
                                                         } else {
                                                             echo '<option value="' . $rowpage[$r] . '">' . $rowpage[$r] . '</option>';
@@ -199,12 +199,12 @@
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">Alamat<span style="color:red">*</span></b></label>
                                                 <?php echo csrf(); ?>
-                                                <input type="text" class="form-control" placeholder="Alamat Pasien" name="user_alamat" required="required" value="<?php echo $key->user_alamat; ?>">
+                                                <input type="text" class="form-control" placeholder="Alamat Pasien" name="user_alamat" required="required" value="<?php echo $key[10]; ?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for=""><b style="color: black">No. HP<span style="color:red">*</span></b></label>
                                                 <?php echo csrf(); ?>
-                                                <input type="text" class="form-control" placeholder="cth: 62852xxxxxxxx" maxlength="14" name="user_no" required="required" value="<?php echo $key->user_no; ?>">
+                                                <input type="text" class="form-control" placeholder="cth: 62852xxxxxxxx" maxlength="14" name="user_no" required="required" value="<?php echo $key[8]; ?>">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -217,7 +217,7 @@
                             </div>
 
                             <!-- Modal Delete-->
-                            <div class="modal fade" id="modalDelete<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <div class="modal fade" id="modalDelete<?php echo $key[0] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -228,10 +228,10 @@
                                         </div>
                                         <?php echo form_open("admin/user/delete") ?>
                                         <div class="modal-body">
-                                            Apakah anda yakin akan menghapus data user : <?php echo $key->user_name; ?> ?
+                                            Apakah anda yakin akan menghapus data user : <?php echo $key[1]; ?> ?
                                             <?php echo csrf(); ?>
-                                            <input type="hidden" class="form-control" placeholder="Nama user" name="user_name" required="required" value="<?php echo $key->user_name; ?>">
-                                            <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key->user_id; ?>">
+                                            <input type="hidden" class="form-control" placeholder="Nama user" name="user_name" required="required" value="<?php echo $key[1]; ?>">
+                                            <input type="hidden" class="form-control" name="user_id" required="required" value="<?php echo $key[0]; ?>">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-danger font-weight-bold">Hapus</button>
@@ -243,7 +243,7 @@
                             </div>
 
                             <!-- Modal Detail-->
-                            <div class="modal fade" id="modalDetail<?php echo $key->user_id ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                            <div class="modal fade" id="modalDetail<?php echo $key[0] ?>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -254,11 +254,74 @@
                                         </div>
 
                                         <div class="modal-body">
-                                            <b>Nama User :</b><br><?php echo $key->user_fullname; ?><br>
-                                            <b>Email :</b><br><?php echo $key->user_email; ?><br>
-                                            <b>Group :</b><br><?php echo $key->group_name; ?><br>
-                                            <b>Username :</b><br><?php echo $key->user_name; ?><br>
+                                            <b>Nama Pasien :</b><br><?php echo $key[1]; ?>
+                                            <hr>
+                                            <b>Email :</b><br><?php echo $key[7]; ?>
+                                            <hr>
+                                            <b>No. Telp :</b><br><?php echo $key[8]; ?>
+                                            <hr>
+                                            <b>Jenis Kelamin :</b><br><?php echo $key[2]; ?>
+                                            <hr>
+                                            <b>Tanggal Lahir :</b><br><?php echo $key[3]; ?>
+                                            <hr>
+                                            <b>Aktifitas :</b><br><?php echo $key[10]; ?>
+                                            <hr>
+                                            Umur = <?php $tanggal = new  DateTime($key[3]);
+                                                    $today = new DateTime('today');
+                                                    $y = $today->diff($tanggal)->y;
 
+                                                    echo $y; ?> Tahun <br>
+                                            Berat Badan = <?php echo $key[4]; ?> (kg) <br>
+                                            Tinggi Badan = <?php echo $key[5]; ?> (cm)
+                                            <hr>
+
+                                            <b>IMT :</b><br>
+                                            <?php
+
+                                            $z =  ($key[4] / ($key[5] * $key[5]));
+
+                                            echo round($z, 4) ?>
+                                            <hr>
+                                            <b>BMR :</b><br>
+                                            <?php echo $key[11]; ?>
+                                            <hr>
+                                            <b>Kebutuhan Kalori :</b><br>
+                                            <?php echo $key[10]; ?> / hari
+
+                                            <hr>
+                                            <b>Menu Makanan Rekomendasi :</b><br>
+
+                                            <?php
+                                            if ($key[12]) {
+                                                $nox = 1;
+                                                $no = 1;
+                                                foreach ($key[12] as $abs => $keys) {
+
+                                            ?>
+                                                    Menu <?php echo $no; ?> <br>
+                                                    <b>Makan Pagi</b> :
+                                                    <br><?php echo $keys->food_name; ?><br>
+
+                                                    <b>Makan Siang</b> :
+                                                    <br><?php echo $keys->food_name2; ?><br>
+                                                    <b>Makan Malam</b> :
+                                                    <br><?php echo $keys->food_name3; ?><br>
+                                                    <b>Total Kalori</b> :
+                                                    <br><?php echo $keys->food_kkal; ?><br>
+                                                    <b>keterangan</b> :
+                                                    <br><?php echo $keys->food_details; ?>
+                                                    <hr>
+                                            <?php
+                                                    $no++;
+                                                }
+                                            } else {
+                                                echo '
+                                        <tr>
+                                            <td colspan="3">Tidak ada ditemukan</td>
+                                        </tr>
+                                        ';
+                                            }
+                                            ?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Tutup</button>

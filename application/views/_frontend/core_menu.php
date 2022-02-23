@@ -8,7 +8,9 @@
                 <nav class="nav-menu d-none d-lg-block">
                     <ul>
                         <li class="active"><a href="<?php echo base_url(); ?>">Home</a></li>
-                        <li><a href="<?php echo site_url('page/contact') ?>">Tentan Aplikasi</a></li>
+                        <li><a href="#faq">F.A.Q</a></li>
+                        <li><a href="#blog">Artikel</a></li>
+                        <li><a href="#footer">Kontak</a></li>
                         <li><a href="<?php echo site_url('auth') ?>">Login</a></li>
                     </ul>
                 </nav><!-- .nav-menu -->

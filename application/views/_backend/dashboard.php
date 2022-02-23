@@ -37,7 +37,7 @@
                             </div>
                             <a href="<?php echo site_url('admin/regulation'); ?>" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
-                            </a>z`
+                            </a>
                         </div>
                     </div>
                     <!-- ./col -->

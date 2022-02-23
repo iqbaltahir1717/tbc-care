@@ -8,6 +8,7 @@ class Pasien extends CI_Controller
         $this->load->model('m_pasien');
         $this->load->model('m_user');
         $this->load->model('m_group');
+        $this->load->model('m_food');
 
         if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
             // ALERT
@@ -35,23 +36,94 @@ class Pasien extends CI_Controller
         $data['links']      = $paging['links'];
         $data['total_data'] = $totalRows;
 
-
-
         //DATA
         $data['setting'] = getSetting();
         $data['title']   = 'User';
         $data['pasien']    = $this->m_pasien->read($perPage, $page, '');
         $data['group']   = $this->m_group->read('', '', '');
 
+        //kebutuhan energi
+        foreach ($data['pasien'] as $p) {
+            $tanggal = new  DateTime($p->user_birth);
+            $today = new DateTime('today');
+            $y = $today->diff($tanggal)->y;
+            if ($p->user_gender == "L") {
+                $bmr = (66.5 + (13.7 * $p->user_bb) + (5.0 * $p->user_tb) - (6.8 * $y));
+                if ($p->user_activity == "Sangat Ringan") {
+                    $l = $bmr * 1.30;
+                }
+                if ($p->user_activity == "Ringan") {
+                    $l = $bmr * 1.56;
+                }
+                if ($p->user_activity == "Sedang") {
+                    $l = $bmr * 1.76;
+                }
+                if ($p->user_activity == "Berat") {
+                    $l = $bmr * 2.10;
+                }
+            }
+            if ($p->user_gender == "W") {
+                $bmr = (665 + (9.6 * $p->user_bb) + (1.8 * $p->user_tb) - (4.7 * $y));
+                if ($p->user_activity == "Sangat Ringan") {
+                    $l = $bmr * 1.30;
+                }
+                if ($p->user_activity == "Ringan") {
+                    $l = $bmr * 1.55;
+                }
+                if ($p->user_activity == "Sedang") {
+                    $l = $bmr * 1.70;
+                }
+                if ($p->user_activity == "Berat") {
+                    $l = $bmr * 2.00;
+                }
+            }
+
+            $nilai_menu_a = 0;
+            $nilai_menu_b = 0;
+            $nilai_menu_c = 0;
+            $nilai_menu_d = 0;
+            $nilai_menu_e = 0;
+
+
+            //menu_a
+            if ($l <= 700) {
+                $data["menu"] = $this->m_food->get(1);
+            } else {
+                if ($l <= 700) {
+                    $data["menu"] = $this->m_food->get(2);
+                } else {
+                    $data["menu"] = $this->m_food->get(2);
+                }
+            }
+
+            //menu_b
+            if ($l >= 700 && $l <= 1200) {
+                $data["menu"] = $this->m_food->get(1);
+            }
+            if ($l > 1200 && $l <= 1800) {
+                $data["menu"] = $this->m_food->get(1);
+            }
+            if ($l > 1800 && $l <= 2400) {
+                $data["menu"] = $this->m_food->get(1);
+            }
+            if ($l > 2400) {
+                $data["menu"] = $this->m_food->get(2);
+            }
+
+            $data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $l, $bmr,  $data["menu"]];
+        }
         // echo "<pre>";
-        // print_r($data['pasien']);
+        // print_r($data["data"]);
         // echo "</pre>";
         // die;
+
         // TEMPLATE
         $view         = "_backend/main/pasien";
         $viewCategory = "all";
         renderTemplate($data, $view, $viewCategory);
     }
+
+
 
 
     public function search()
@@ -77,7 +149,7 @@ class Pasien extends CI_Controller
 
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'User';
+        $data['title']   = 'Pasien';
         $data['pasien']    = $this->m_pasien->read($perPage, $page, $data['search']);
         $data['group']   = $this->m_group->read('', '', '');
 

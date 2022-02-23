@@ -34,13 +34,11 @@ class Makanan extends CI_Controller
         $data['links']      = $paging['links'];
         $data['total_data'] = $totalRows;
 
-
-
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'User';
+        $data['title']   = 'Menu Makanan';
         $data['food']    = $this->m_food->read($perPage, $page, '');
-        $data['category_fod']   = $this->m_category_food->read('', '', '');
+        $data['category_food']   = $this->m_category_food->read('', '', '');
 
 
         // TEMPLATE
@@ -54,14 +52,14 @@ class Makanan extends CI_Controller
     {
         if ($this->input->post('key')) {
             $data['search'] = $this->input->post('key');
-            $this->session->set_userdata('sess_search_user', $data['search']);
+            $this->session->set_userdata('sess_search_food', $data['search']);
         } else {
-            $data['search'] = $this->session->userdata('sess_search_user');
+            $data['search'] = $this->session->userdata('sess_search_food');
         }
 
         // PAGINATION
-        $baseUrl    = base_url() . "admin/user/search/" . $data['search'] . "/";
-        $totalRows  = count((array)$this->m_user->read('', '', $data['search']));
+        $baseUrl    = base_url() . "admin/makanan/search/" . $data['search'] . "/";
+        $totalRows  = count((array)$this->m_food->read('', '', $data['search']));
         $perPage    = $this->session->userdata('sess_rowpage');
         $uriSegment = 5;
         $paging     = generatePagination($baseUrl, $totalRows, $perPage, $uriSegment);
@@ -74,11 +72,11 @@ class Makanan extends CI_Controller
         //DATA
         $data['setting'] = getSetting();
         $data['title']   = 'List Menu Makanan';
-        $data['user']    = $this->m_user->read($perPage, $page, $data['search']);
-        $data['group']   = $this->m_group->read('', '', '');
+        $data['food']    = $this->m_food->read($perPage, $page, $data['search']);
+        $data['category_food']   = $this->m_category_food->read('', '', '');
 
         // TEMPLATE
-        $view         = "_backend/master_data/user";
+        $view         = "_backend/main/makanan";
         $viewCategory = "all";
         renderTemplate($data, $view, $viewCategory);
     }
@@ -88,27 +86,27 @@ class Makanan extends CI_Controller
     {
         csrfValidate();
         // POST
-        $data['user_id']        = '';
-        $data['user_name']      = $this->input->post('user_name');
-        $data['user_password']  = password_hash($this->input->post('user_password'), PASSWORD_BCRYPT);
-        $data['user_fullname']  = $this->input->post('user_fullname');
-        $data['user_email']     = $this->input->post('user_email');
-        $data['user_lastlogin'] = '';
-        $data['user_photo']     = '';
-        $data['group_id']       = $this->input->post('group_id');
-        $data['createtime']     = date('Y-m-d H:i:s');
-        $this->m_user->create($data);
+        $data['food_id']        = '';
+        $data['food_name']      = $this->input->post('food_name');
+        $data['food_kkal']  = $this->input->post('food_kkal');
+        $data['food_name2']     = $this->input->post('food_name2');
+        $data['food_kkal2']  = $this->input->post('food_kkal2');
+        $data['food_name3']     = $this->input->post('food_name3');
+        $data['food_kkal3']  = $this->input->post('food_kkal3');
+        $data['category_food_id']       = $this->input->post('category_food_id');
+        $data['food_details']       = $this->input->post('food_details');
+        $this->m_food->create($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menambah data user " . $data['user_name'];
+        $message    = $this->session->userdata('user_name') . " menambah data makanan ";
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil menambah data user " . $data['user_name'];
+        $alertMessage = "Berhasil menambah data makanan #" . $data['food_id'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('admin/user');
+        redirect('admin/makanan');
     }
 
 
@@ -116,28 +114,27 @@ class Makanan extends CI_Controller
     {
         csrfValidate();
         // POST
-        $data['user_id']       = $this->input->post('user_id');
-        $data['user_name']     = $this->input->post('user_name');
-
-        if ($this->input->post('user_password') != "") {
-            $data['user_password'] = password_hash($this->input->post('user_password'), PASSWORD_BCRYPT);
-        }
-
-        $data['user_fullname'] = $this->input->post('user_fullname');
-        $data['user_email']    = $this->input->post('user_email');
-        $data['group_id']      = $this->input->post('group_id');
-        $this->m_user->update($data);
+        $data['food_id']       = $this->input->post('food_id');
+        $data['food_name']      = $this->input->post('food_name');
+        $data['food_kkal']  = $this->input->post('food_kkal');
+        $data['food_name2']     = $this->input->post('food_name2');
+        $data['food_kkal2']  = $this->input->post('food_kkal2');
+        $data['food_name3']     = $this->input->post('food_name3');
+        $data['food_kkal3']  = $this->input->post('food_kkal3');
+        $data['category_food_id']       = $this->input->post('category_food_id');
+        $data['food_details']       = $this->input->post('food_details');
+        $this->m_food->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " mengubah data user dengan ID = " . $data['user_id'] . " - " . $data['user_name'];
+        $message    = $this->session->userdata('user_name') . " mengubah data makanan dengan ID = " . $data['food_id'] . " - " . $data['food_name'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil mengubah data user : " . $data['user_name'];
+        $alertMessage = "Berhasil mengubah data makanan : #" . $data['food_id'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('admin/user');
+        redirect('admin/makanan');
     }
 
 
@@ -145,17 +142,17 @@ class Makanan extends CI_Controller
     {
         csrfValidate();
         // POST
-        $this->m_user->delete($this->input->post('user_id'));
+        $this->m_food->delete($this->input->post('food_id'));
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menghapus data user dengan ID = " . $this->input->post('user_id') . " - " . $this->input->post('user_name');
+        $message    = $this->session->userdata('food_id') . " menghapus data makanan dengan ID = " . $this->input->post('food_id') . " - " . $this->input->post('food_id');
         createLog($message);
 
         // ALERT
         $alertStatus  = "failed";
-        $alertMessage = "Menghapus data user : " . $this->input->post('user_name');
+        $alertMessage = "Menghapus data makanan : " . $this->input->post('food_nid');
         getAlert($alertStatus, $alertMessage);
 
-        redirect('admin/user');
+        redirect('admin/makanan');
     }
 }

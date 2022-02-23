@@ -21,7 +21,7 @@ class Home extends CI_Controller
 		$data['faq']                 = $this->m_faq->read('', '', '');
 		$data['slider']              = $this->m_slider->read('', '', '');
 		$data['news_category']       = $this->m_news_category->read('', '', '');
-		$data['news']                = $this->m_news->read(4, 0, '', 1, '');
+		$data['news']                = $this->m_news->read(4, 0, '', 3, '');
 
 		// TEMPLATE
 		$view         = "_frontend/home";

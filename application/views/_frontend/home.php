@@ -101,6 +101,7 @@
                     </div>
                 <?php } ?>
             </div>
+            <a class="float-right" href="<?php echo site_url('auth') ?>"><u>Artikel Lainnya -></u></a>
         </div>
     </section>
 </main>

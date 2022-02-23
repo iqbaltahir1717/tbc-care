@@ -10,12 +10,14 @@ class M_food extends CI_Model
 
     public function read($limit, $start, $key)
     {
-        $this->db->select('a.*, b.category_food_name');
+        $this->db->select('a.*, b.*');
         $this->db->from('tbl_food a');
-        $this->db->join('tbl_category_food b', 'a.food_id = b.category_food_id', 'LEFT');
+        $this->db->join('tbl_category_food b', 'a.category_food_id = b.category_food_id', 'LEFT');
 
         if ($key != '') {
             $this->db->like("a.food_name", $key);
+            $this->db->or_like("a.food_name2", $key);
+            $this->db->or_like("a.food_name3", $key);
             $this->db->or_like("b.category_food_name", $key);
         }
 
@@ -53,7 +55,7 @@ class M_food extends CI_Model
         $this->db->select('a.*, b.category_food_name');
         $this->db->from('tbl_food a');
         $this->db->join('tbl_category_food b', 'a.category_food_id = b.category_food_id', 'LEFT');
-        $this->db->where('a.food_id', $id);
+        $this->db->where('a.category_food_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
