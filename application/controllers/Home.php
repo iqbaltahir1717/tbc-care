@@ -8,7 +8,6 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->model('m_content');
 		$this->load->model('m_faq');
-		$this->load->model('m_slider');
 		$this->load->model('m_news');
 		$this->load->model('m_news_category');
 	}
@@ -19,7 +18,6 @@ class Home extends CI_Controller
 		$data['setting']             = getSetting();
 		$data['sambutan']            = $this->m_content->get('sambutan');
 		$data['faq']                 = $this->m_faq->read('', '', '');
-		$data['slider']              = $this->m_slider->read('', '', '');
 		$data['news_category']       = $this->m_news_category->read('', '', '');
 		$data['news']                = $this->m_news->read(4, 0, '', 3, '');
 

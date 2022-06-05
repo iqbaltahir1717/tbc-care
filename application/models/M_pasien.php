@@ -57,6 +57,11 @@ class M_pasien extends CI_Model
         return null;
     }
 
+    public function create($data)
+    {
+        $this->db->insert('tbl_pasien', $data);
+    }
+
     function __destruct()
     {
         $this->db->close();

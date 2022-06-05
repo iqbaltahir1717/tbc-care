@@ -15,9 +15,6 @@
                         <div class="col-lg-3 col-md-6 footer-links">
 
                         </div>
-
-
-
                         <div class="col-lg-3 col-md-6 footer-contact">
                             <h4>Kontak Kami</h4>
                             <p>

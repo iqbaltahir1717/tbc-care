@@ -278,6 +278,8 @@
                                             <b>IMT :</b><br>
                                             <?php
 
+                                            
+
                                             $z =  ($key[4] / ($key[5] * $key[5]));
 
                                             echo round($z, 4) ?>
@@ -296,7 +298,6 @@
                                                 $nox = 1;
                                                 $no = 1;
                                                 foreach ($key[12] as $abs => $keys) {
-
                                             ?>
                                                     Menu <?php echo $no; ?> <br>
                                                     <b>Makan Pagi</b> :

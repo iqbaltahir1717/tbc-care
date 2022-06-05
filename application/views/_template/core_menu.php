@@ -109,21 +109,11 @@
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="header">Main Menu</li>
                             <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                            <li><a href="<?php echo site_url('admin/pasien') ?>"><i class="fa fa-user"></i> <span>List Pasien</span></a></li>
+                            <li><a href="<?php echo site_url('admin/pasien') ?>"><i class="fa fa-user"></i> <span> Pasien</span></a></li>
                             <li><a href="<?php echo site_url('admin/makanan') ?>"><i class="fa fa-circle"></i> <span>List Makanan</span></a></li>
+                            <li><a href="<?php echo site_url('admin/user'); ?>"><i class="fa fa-database"></i> <span>Tambah Pengguna</span></a></li>
                             <!-- <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-gears"></i> <span>Manajemen Output</span></a></li> -->
                             <li class="header">Pengaturan Sistem</li>
-                            <li class="treeview">
-                                <a href="#"> <i class="fa fa-list"></i> <span>Profil Sistem</span>
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="<?php echo site_url('admin/content/page/sambutan'); ?>"><i class="fa fa-circle-o"></i> Kata Sambutan</a></li>
-                                    <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-file-image-o"></i> <span>Slider Informasi</span></a></li>
-                                </ul>
-                            </li>
                             <li class="treeview">
                                 <a href="#"> <i class="fa fa-newspaper-o"></i> <span>Manajemen Artikel</span>
                                     <span class="pull-right-container">
@@ -138,10 +128,9 @@
                             </li>
 
                             <li><a href="<?php echo site_url('admin/faq'); ?>"><i class="fa fa-database"></i> <span>F.A.Q</span></a></li>
-                            <li><a href="<?php echo site_url('admin/group'); ?>"><i class="fa fa-database"></i> <span>Group</span></a></li>
-                            <li><a href="<?php echo site_url('admin/user'); ?>"><i class="fa fa-database"></i> <span>User</span></a></li>
+                            <!-- <li><a href="<?php echo site_url('admin/group'); ?>"><i class="fa fa-database"></i> <span>Group</span></a></li> -->
                             <li><a href="<?php echo site_url('admin/log'); ?>"><i class="fa fa-circle-o text-red"></i> <span>Sistem Log</span></a></li>
-                            <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-newspaper-o"></i> <span>Tentang Aplikasi</span></a></li>
+                            <!-- <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-newspaper-o"></i> <span>Tentang Aplikasi</span></a></li> -->
                         </ul>
                     <?php } elseif ($this->session->userdata('user_group') == 2) { ?>
 
@@ -150,7 +139,6 @@
                             <li class="header">Main Menu</li>
                             <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                             <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-file-image-o"></i> <span>Detail Riwayat Pasien</span></a></li>
-                            <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-newspaper-o"></i> <span>Tentang Aplikasi</span></a></li>
                         </ul>
 
                     <?php } ?>
