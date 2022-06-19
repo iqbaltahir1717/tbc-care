@@ -41,6 +41,7 @@ class Kalkulator extends CI_Controller
 				$total_akhirs = "-";
 				$data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $hs, $bmr,  $data["menu"], $output, $total_akhirs];
 			} else {
+
 				//bmr dan harris benedict berdasar jenis kelamin dan aktifias
 				if ($p->user_gender == "L") {
 					$bmr = (66.5 + (13.7 * $p->user_bb) + (5.0 * $p->user_tb) - (6.8 * $y));
@@ -76,9 +77,17 @@ class Kalkulator extends CI_Controller
 				//nilai harris_benedict/nilai kebutuhan kalori
 				$hs = round($l, 1);
 
+				if ($p->user_tb == 175) {
+					$p->user_tb = 174;
+					$user_tb_optimation = $p->user_tb;
+				} else {
+					$user_tb_optimation =  $p->user_tb;
+				}
+
+
 				//variabel_input
 				$value_bb = $p->user_bb;
-				$value_tb = $p->user_tb;
+				$value_tb = $user_tb_optimation;
 
 				//------------------fuzzyfikasi berat badan------------------
 
@@ -103,12 +112,12 @@ class Kalkulator extends CI_Controller
 				}
 
 				//berat
-				if ($value_bb >= 55) {
-					$bb_berat = 1;
-				} else if (55 <= $value_bb &&  $value_bb <= 65) {
-					$bb_berat = ($value_bb - 55) / 10;
-				} else {
+				if ($value_bb <= 55) {
 					$bb_berat = 0;
+				} else if (55 <= $value_bb &&  $value_bb <= 75) {
+					$bb_berat = ($value_bb - 55) / 20;
+				} else if ($value_bb >= 75) {
+					$bb_berat = 1;
 				}
 
 				//------------------fuzzyfikasi tinggi badan------------------
@@ -134,12 +143,12 @@ class Kalkulator extends CI_Controller
 				}
 
 				//tinggi
-				if ($value_tb >= 175) {
-					$tb_tinggi = 1;
+				if ($value_tb <= 175) {
+					$tb_tinggi = 0;
 				} else if (165 <= $value_tb &&  $value_tb <= 175) {
 					$tb_tinggi = ($value_tb - 165) / 10;
-				} else {
-					$tb_tinggi = 0;
+				} else if ($value_tb  >= 175) {
+					$tb_tinggi = 1;
 				}
 
 				//------------------implikasi------------------------
@@ -161,7 +170,7 @@ class Kalkulator extends CI_Controller
 				$zpredikat[3] = 27 - $rules[3]; //gizi_lebih
 				$zpredikat[4] = 25 - $rules[4]; //normal
 				$zpredikat[5] = 18.5 - $rules[5]; //kurang
-				$zpredikat[6] = 17 - $rules[6]; //sangaat lebih
+				$zpredikat[6] = 26 + $rules[6]; //sangaat lebih
 				$zpredikat[7] = 27 - $rules[7]; //lebih 
 				$zpredikat[8] = 25 - $rules[8]; //normal
 
@@ -196,14 +205,14 @@ class Kalkulator extends CI_Controller
 					$output = "Normal";
 				} else if (24 <= $total_akhirs && $total_akhirs <= 27) {
 					$output = "Gemuk Tingkat Ringan";
-				} else if (26 <= $total_akhirs && $total_akhirs <= 33) {
+				} else if (26 <= $total_akhirs && $total_akhirs >= 33) {
 					$output = "Gemuk Tingkat Berat";
 				} else {
 					$output = "-";
 				}
 
 				// echo "<pre>";
-				// print_r($output);
+				// print_r($total_akhirs);
 				// echo "</pre>";
 				// die;
 

@@ -7,6 +7,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('m_food');
 		$this->load->model('m_user');
 		$this->load->model('m_news');
+		$this->load->model('m_group');
 		// check session data
 		if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 2) {
 			// ALERT
@@ -21,10 +22,13 @@ class Dashboard extends CI_Controller
 	{
 		// DATA
 		$data['setting'] = getSetting();
+		$data['profile']    = $this->m_user->get($this->session->userdata('user_id'));
+		$data['group']   = $this->m_group->read('', '', '');
 
 		$data['food'] =   $this->m_food->widget();
 		$data['pasien'] =   $this->m_user->widget();
 		$data['artikel'] =   $this->m_news->widget();
+
 
 
 		// TEMPLATE
