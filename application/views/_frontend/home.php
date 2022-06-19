@@ -3,14 +3,14 @@
     <div class="container">
         <div class="hero-content">
             <div class="left-content">
-                <span>Tempat Terbaik Untuk</span>
+                <span style="color:#fff; background-color: #525252; padding:10px;border-radius: 9px; ">"Temukan Tubercolosis, Obati Sampai Sebuh"</span>
                 <h1>Capai Badan yang Sehat Bersama <b>TBC-CARE</b></h1>
                 <div class="mini-content">
                     <div class="video-content">
                         <img src="" alt="">
                         <img src="" alt="">
                     </div>
-                    <p>The Health Center Program Compliance Manual and other resources to help current and prospective health centers understand program requirements.</p>
+                    <p>Bersama Kami TBC-Care Puskesmas Poasia Kendari membantu anda untuk meraih hidup sehat, menghindari dan menyembuhkan penyakit TBC . </p>
                 </div>
                 <!-- <a href="<?php echo site_url('auth') ?>" class="btn-primary bttn bttn-blue">Daftar</a> -->
             </div>
@@ -28,13 +28,13 @@
             <div class="row content" style="padding: 70px 0;">
                 <div class="col-lg-6">
                     <img src="<?php echo base_url(); ?>assets/core-front/img/image-doctor-dummy.png" height="500px">
-                    <p>Serah Lunax James R.</p>
-                    <span style="padding-left: 20px;">Ketua Rumah Sakit</span>
+                    <p>Nurfadilah Fahmi</p>
+                    <span style="padding-left: 20px;">Ahli Pengobatan TBC</span>
                 </div>
                 <div class="col-lg-6 images-doktor">
                     <span>Mengapa TBC-CARE ❓</span>
                     <h1>Memberikan Kesehatan Terbaik untuk orang baik</h1>
-                    <p>The Health Center Program Compliance Manual and other resources to help current. <br>✅ Hemat Biaya <br>✅ Dokter Profesional <br>✅ Saran Makanan
+                    <p>Health Center Program untuk membantu orang-orang yang mengidap TBC. <br>✅ Hemat Biaya <br>✅ Dokter Profesional <br>✅ Saran Makanan
                     </p>
 
                     <a href="#footer" class="btn-primary bttn bttn-border-blue" style="font-size:16px">Kontak Kami</a>
@@ -67,7 +67,7 @@
             <div class="row content">
                 <div class="col-lg-6">
                     <p class="title">F.A.Q</p>
-                    <p>The Health Center Program Compliance Manual and other resources to help current.
+                    <p>Seputar Pertanyaan Terkait Penyakit TBC dan Layanan Kami.
                     </p>
                     <div class="faq-list">
                         <ul>

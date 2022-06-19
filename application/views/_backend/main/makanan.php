@@ -65,9 +65,9 @@
 
                                 <div class="modal-body">
                                     <div class="form-group">
-                                        <label for=""><b style="color: black">Jenis Menu <span style="color:red">*</span></b></label>
+                                        <label for=""><b style="color: black">Rekomendasi Menu <span style="color:red">*</span></b></label>
                                         <select class="form-control" name="category_food_id" required>
-                                            <option value="">- Pilih Jenis Menu -</option>
+                                            <option value="">- Pilih Rekomendasi Menu -</option>
                                             <?php
                                             foreach ($category_food as $g) {
                                                 echo '<option value="' . $g->category_food_id . '">' . $g->category_food_name . '</option>';
@@ -137,11 +137,11 @@
                 <table class="table table-bordered">
                     <tr style="background-color: gray;color:white">
                         <th style="width: 60px">No</th>
-                        <th style="width: 8%">Jenis Menu</th>
+                        <th style="width: 8%">Rekomendasi Menu</th>
                         <th>Menu Pagi (Kkal)</th>
                         <th>Menu Siang (Kkal)</th>
                         <th>Menu Malam (Kkal)</th>
-                        <th>Total (Kkal)</th>
+                        <th>Total (Kkal)/Hari</th>
                         <th>Keterangan</th>
                         <th style="width: 14%">#aksi</th>
                     </tr>

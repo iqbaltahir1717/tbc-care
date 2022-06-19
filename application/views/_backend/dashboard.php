@@ -29,13 +29,35 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h3>32</h3>
-                                <p>Total User</p>
+                                <h3><?php echo $pasien[0]->total_pasien_baru ?></h3>
+                                <p>Total Pasien Pending</p>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-gavel"></i>
+                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
+                                More info <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-primary">
+                            <div class="inner">
+                                <h3><?php echo $pasien[0]->total_pasien_proses ?></h3>
+                                <p>Total Pasien Masa Pengobatan</p>
                             </div>
-                            <a href="<?php echo site_url('admin/regulation'); ?>" class="small-box-footer">
+                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
+                                More info <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-primary">
+                            <div class="inner">
+                                <h3><?php echo $pasien[0]->total_pasien_selesai ?></h3>
+                                <p>Total Pasien Selesai</p>
+                            </div>
+                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -45,11 +67,20 @@
                         <!-- small box -->
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h3>98</h3>
-                                <p>Total Jenis Makanan</p>
+                                <h3><?php echo $food[0]->total_food ?></h3>
+                                <p>Total Rekomendasi Makanan</p>
                             </div>
-                            <div class="icon">
-                                <i class="fa fa-rss-square"></i>
+                            <a href="<?php echo site_url('admin/makanan'); ?>" class="small-box-footer">
+                                More info <i class="fa fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xs-6">
+                        <!-- small box -->
+                        <div class="small-box bg-primary">
+                            <div class="inner">
+                                <h3><?php echo $artikel[0]->total_artikel ?></h3>
+                                <p>Total Artikel</p>
                             </div>
                             <a href="<?php echo site_url('admin/news'); ?>" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>

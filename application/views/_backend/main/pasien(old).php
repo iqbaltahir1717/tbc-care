@@ -65,12 +65,11 @@
                     <tr style="background-color: gray;color:white">
                         <th style="width: 60px">No</th>
                         <th>Nama Lengkap</th>
-                        <th>Status Pasien</th>
-                        <th>Status Gizi</th>
-                        <th>Menu Rekomendasi</th>
-                        <th>Tingkat BMR</th>
-                        <th>Nilai IMT</th>
-
+                        <th>Jenis Kelamin</th>
+                        <th>Umur (Tahun)</th>
+                        <th>Berat Badan (kg)</th>
+                        <th>Tinggi Badan (cm)</th>
+                        <th>Status</th>
                         <th style="width: 15%">#aksi</th>
                     </tr>
                     <?php
@@ -83,22 +82,26 @@
                             <tr>
                                 <td><?php echo $no + $numbers; ?></td>
                                 <td><?php echo $key[1]; ?></td>
-                                <td><span class="label label-pill
-                                <?php if ($key[6] == "Selesai")
-                                    echo " label-success";
-                                else if ($key[6] == "Masa Pengobatan") echo "label-primary";
-                                else if ($key[6] == "Pasien Baru") echo "label-default"  ?>"><?php echo $key[6]; ?></span></td>
-                                <td><?php echo $key[13]; ?></td>
-                                <td><?php foreach ($key[12] as $keys) {
-                                        echo $keys->category_food_name;
-                                    } ?></td>
-                                <td><?php echo $key[11]; ?></td>
-                                <td><?php
-                                    if ($key[5] != 0) {
-                                        $tb_meter = $key[5] / 100;
-                                        $z =  ($key[4] / ($tb_meter * $tb_meter));
-                                        echo round($z, 1);
-                                    } else echo "-"  ?></td>
+
+                                <td>
+                                    <?php if ("W" == $key[2]) {
+                                        echo "Perempuan";
+                                    }
+                                    if ("L" == $key[2]) {
+                                        echo "Laki-Laki";
+                                    } ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    $tanggal = new  DateTime($key[3]);
+                                    $today = new DateTime('today');
+                                    $y = $today->diff($tanggal)->y;
+
+                                    echo $y;
+                                    ?></td>
+                                <td><?php echo $key[4]; ?></td>
+                                <td><?php echo $key[5]; ?></td>
+                                <td><?php echo $key[6]; ?></td>
                                 <td>
                                     <button class="btn btn-xs btn-flat btn-info" data-toggle="modal" data-target="#modalDetail<?php echo $key[0]; ?>">detail</button>
                                     <button class="btn btn-xs btn-flat btn-warning" data-toggle="modal" data-target="#modalUpdate<?php echo $key[0]; ?>">update</button>
@@ -260,7 +263,7 @@
                                             <hr>
                                             <b>No. Telp :</b><br><?php echo $key[8]; ?>
                                             <hr>
-                                            <b>Jenis Kelamin :</b><br><?php if ($key[2] == "W") { ?> Perempuan <?php } else { ?> Laki-Laki <?php } ?>
+                                            <b>Jenis Kelamin :</b><br><?php echo $key[2]; ?>
                                             <hr>
                                             <b>Tanggal Lahir :</b><br><?php echo $key[3]; ?>
                                             <hr>
@@ -277,31 +280,52 @@
 
                                             <b>IMT :</b><br>
                                             <?php
-                                            if ($key[5] != 0) {
-                                                $tb_meter = $key[5] / 100;
-                                                $z =  ($key[4] / ($tb_meter * $tb_meter));
-                                                echo round($z, 1);
-                                            } else echo "-"  ?>
+
+
+
+                                            $z =  ($key[4] / ($key[5] * $key[5]));
+
+                                            echo round($z, 4) ?>
                                             <hr>
                                             <b>BMR :</b><br>
                                             <?php echo $key[11]; ?>
                                             <hr>
                                             <b>Kebutuhan Kalori :</b><br>
                                             <?php echo $key[10]; ?> / hari
-                                            <hr>
-                                            <b>Status Gizi :</b><br>
-                                            <?php echo $key[13]; ?><br><br>
-                                            <b>Nilai Defuzzyfikasi :</b><br>
-                                            <?php echo $key[14]; ?>
-                                            <hr>
 
-                                            <b>Menu Rekomendasi :</b><br>
-                                            <?php foreach ($key[12] as $keys) {
-                                                echo $keys->category_food_name;
-                                            } ?>
                                             <hr>
+                                            <b>Menu Makanan Rekomendasi :</b><br>
 
+                                            <?php
+                                            if ($key[12]) {
+                                                $nox = 1;
+                                                $no = 1;
+                                                foreach ($key[12] as $abs => $keys) {
+                                            ?>
+                                                    <?php echo $keys->category_food_name; ?> <br>
+                                                    <b>Makan Pagi</b> :
+                                                    <br><?php echo $keys->food_name; ?><br>
 
+                                                    <b>Makan Siang</b> :
+                                                    <br><?php echo $keys->food_name2; ?><br>
+                                                    <b>Makan Malam</b> :
+                                                    <br><?php echo $keys->food_name3; ?><br>
+                                                    <b>Total Kalori</b> :
+                                                    <br><?php echo $keys->food_kkal; ?><br>
+                                                    <b>keterangan</b> :
+                                                    <br><?php echo $keys->food_details; ?>
+                                                    <hr>
+                                            <?php
+                                                    $no++;
+                                                }
+                                            } else {
+                                                echo '
+                                        <tr>
+                                            <td colspan="3">Tidak ada ditemukan</td>
+                                        </tr>
+                                        ';
+                                            }
+                                            ?>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Tutup</button>

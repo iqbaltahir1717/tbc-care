@@ -138,7 +138,7 @@
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="header">Main Menu</li>
                             <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                            <li><a href="<?php echo site_url('admin/slider') ?>"><i class="fa fa-file-image-o"></i> <span>Detail Riwayat Pasien</span></a></li>
+                            <li><a href="<?php echo site_url('user/riwayat') ?>"><i class="fa fa-file-image-o"></i> <span>Riwayat Pasien</span></a></li>
                         </ul>
 
                     <?php } ?>

@@ -52,9 +52,8 @@ class M_food extends CI_Model
 
     public function get($id)
     {
-        $this->db->select('a.*, b.category_food_name');
-        $this->db->from('tbl_food a');
-        $this->db->join('tbl_category_food b', 'a.category_food_id = b.category_food_id', 'LEFT');
+        $this->db->select('a.category_food_name');
+        $this->db->from('tbl_category_food a');
         $this->db->where('a.category_food_id', $id);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -69,5 +68,13 @@ class M_food extends CI_Model
     function __destruct()
     {
         $this->db->close();
+    }
+
+
+    public function widget()
+    {
+        $query  = $this->db->query(" SELECT
+            (SELECT count(food_id) FROM tbl_food) as total_food");
+        return $query->result();
     }
 }
