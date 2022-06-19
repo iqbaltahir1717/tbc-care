@@ -65,6 +65,22 @@ class M_food extends CI_Model
         return null;
     }
 
+    public function get_all($id)
+    {
+        $this->db->select('a.*, b.*');
+        $this->db->from('tbl_food a');
+        $this->db->join('tbl_category_food b', 'a.category_food_id = b.category_food_id', 'LEFT');
+        $this->db->where('a.category_food_id', $id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return null;
+    }
+
     function __destruct()
     {
         $this->db->close();

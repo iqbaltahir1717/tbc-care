@@ -137,4 +137,3 @@ class Faq extends CI_Controller {
     }
     
 }
-?>

@@ -22,59 +22,64 @@
                 <?php
                 if ($this->session->flashdata('alert')) {
                     echo $this->session->flashdata('alert');
+                    unset($_SESSION['alert']);
                 }
                 ?>
                 <div class="row">
-                    <div class="col-lg-6 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3><?php echo $pasien[0]->total_pasien_baru ?></h3>
-                                <p>Total Pasien Pending</p>
+                    <?php if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') == 1) { ?>
+                        <div class="col-lg-6 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3><?php echo $pasien[0]->total_pasien_baru ?></h3>
+                                    <p>Total Pasien Pending</p>
+                                </div>
+                                <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
+                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
-                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
-                            </a>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3><?php echo $pasien[0]->total_pasien_proses ?></h3>
-                                <p>Total Pasien Masa Pengobatan</p>
+
+                        <div class="col-lg-6 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3><?php echo $pasien[0]->total_pasien_proses ?></h3>
+                                    <p>Total Pasien Masa Pengobatan</p>
+                                </div>
+                                <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
+                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
-                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
-                            </a>
                         </div>
-                    </div>
-                    <div class="col-lg-6 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3><?php echo $pasien[0]->total_pasien_selesai ?></h3>
-                                <p>Total Pasien Selesai</p>
+                        <div class="col-lg-6 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3><?php echo $pasien[0]->total_pasien_selesai ?></h3>
+                                    <p>Total Pasien Selesai</p>
+                                </div>
+                                <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
+                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
-                            <a href="<?php echo site_url('admin/pasien'); ?>" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
-                            </a>
                         </div>
-                    </div>
+                        <div class="col-lg-6 col-xs-6">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <h3><?php echo $food[0]->total_food ?></h3>
+                                    <p>Total Rekomendasi Makanan</p>
+                                </div>
+                                <a href="<?php echo site_url('admin/makanan'); ?>" class="small-box-footer">
+                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    <?php } ?>
                     <!-- ./col -->
-                    <div class="col-lg-6 col-xs-6">
-                        <!-- small box -->
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3><?php echo $food[0]->total_food ?></h3>
-                                <p>Total Rekomendasi Makanan</p>
-                            </div>
-                            <a href="<?php echo site_url('admin/makanan'); ?>" class="small-box-footer">
-                                More info <i class="fa fa-arrow-circle-right"></i>
-                            </a>
-                        </div>
-                    </div>
+
                     <div class="col-lg-6 col-xs-6">
                         <!-- small box -->
                         <div class="small-box bg-primary">
@@ -82,7 +87,7 @@
                                 <h3><?php echo $artikel[0]->total_artikel ?></h3>
                                 <p>Total Artikel</p>
                             </div>
-                            <a href="<?php echo site_url('admin/news'); ?>" class="small-box-footer">
+                            <a href="<?php echo site_url('page/information/3/1'); ?>" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>

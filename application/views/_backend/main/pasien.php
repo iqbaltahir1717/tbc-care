@@ -55,6 +55,7 @@
                 <?php
                 if ($this->session->flashdata('alert')) {
                     echo $this->session->flashdata('alert');
+                    unset($_SESSION['alert']);
                 }
 
                 if ($this->uri->segment(3) == "search") {
@@ -144,7 +145,7 @@
                                                 <select class="form-control" name="user_activity" required="required">
                                                     <option value="">-Aktifitas Pasien-</option>
                                                     <?php
-                                                    $rowpage = array('Sangat Ringan', 'Ringan', 'Sedang', 'Berat', 'Sangat Berat');
+                                                    $rowpage = array('Sangat Ringan', 'Ringan', 'Sedang', 'Berat');
                                                     for ($r = 0; $r < count($rowpage); $r++) {
                                                         if ($rowpage[$r] == $key[9]) {
                                                             echo '<option value="' . $rowpage[$r] . '" selected>' . $rowpage[$r] . '</option>';

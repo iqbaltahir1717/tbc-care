@@ -8,7 +8,7 @@ class Dashboard extends CI_Controller
 		$this->load->model('m_user');
 		$this->load->model('m_news');
 		// check session data
-		if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
+		if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 2) {
 			// ALERT
 			$alertStatus  = 'failed';
 			$alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';

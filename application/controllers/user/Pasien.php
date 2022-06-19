@@ -283,6 +283,7 @@ class Pasien extends CI_Controller
         $data['group']   = $this->m_group->read('', '', '');
 
         //kebutuhan energi
+        //kebutuhan energi
         foreach ($data['pasien'] as $p) {
 
             //umur_pasien
@@ -521,47 +522,5 @@ class Pasien extends CI_Controller
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/pasien');
-    }
-
-    public function lowTB($value)
-    {
-        $kualitasTB = 0;
-        if ($value <= 150) {
-            $kualitasTB = 1;
-        } else {
-            if ($value < 152) {
-                $kualitasTB = (152 - $value) / 5;
-            } else {
-                $kualitasTB = 0;
-            }
-        }
-    }
-
-    public function normalTB($value)
-    {
-        $kualitasTB = 0;
-        if ($value <= 150) {
-            $kualitasTB = 1;
-        } else {
-            if ($value < 152) {
-                $kualitasTB = (152 - $value) / 5;
-            } else {
-                $kualitasTB = 0;
-            }
-        }
-    }
-
-    public function highTB($value)
-    {
-        $kualitasTB = 0;
-        if ($value <= 150) {
-            $kualitasTB = 1;
-        } else {
-            if ($value < 152) {
-                $kualitasTB = (152 - $value) / 5;
-            } else {
-                $kualitasTB = 0;
-            }
-        }
     }
 }

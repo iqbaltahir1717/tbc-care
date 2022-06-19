@@ -50,7 +50,12 @@
 
                                     <li class="user-footer">
                                         <div class="pull-left">
-                                            <a href="<?php echo site_url('admin/profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                                            <?php if ($this->session->userdata('user_group') == 1) { ?>
+                                                <a href="<?php echo site_url('admin/profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                                            <?php } ?>
+                                            <?php if ($this->session->userdata('user_group') == 2) { ?>
+                                                <a href="<?php echo site_url('user/profile') ?>" class="btn btn-default btn-flat">Profile</a>
+                                            <?php } ?>
                                         </div>
                                         <div class="pull-right">
                                             <a href="<?php echo site_url('auth/logout') ?>" class="btn btn-google btn-flat">Sign out</a>
@@ -137,8 +142,8 @@
                         <!-- Inputer Menu -->
                         <ul class="sidebar-menu" data-widget="tree">
                             <li class="header">Main Menu</li>
-                            <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                            <li><a href="<?php echo site_url('user/riwayat') ?>"><i class="fa fa-file-image-o"></i> <span>Riwayat Pasien</span></a></li>
+                            <li class="active"><a href="<?php echo site_url('user/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                            <li><a href="<?php echo site_url('user/kalkulator') ?>"><i class="fa fa-calculator"></i> <span>Kalkulator TBC-Care</span></a></li>
                         </ul>
 
                     <?php } ?>

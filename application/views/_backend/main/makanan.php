@@ -128,6 +128,7 @@
                 <?php
                 if ($this->session->flashdata('alert')) {
                     echo $this->session->flashdata('alert');
+                    unset($_SESSION['alert']);
                 }
 
                 if ($this->uri->segment(3) == "search") {

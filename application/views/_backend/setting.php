@@ -23,6 +23,7 @@
                             <?php
                             if ($this->session->flashdata('alert')) {
                                 echo $this->session->flashdata('alert') . "<br>";
+                                unset($_SESSION['alert']);
                             }
                             ?>
                             <div class="row">

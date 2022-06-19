@@ -9,12 +9,12 @@ class Profile extends CI_Controller
         $this->load->model('m_group');
         $this->load->library('upload');
 
-        if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
+        if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 2) {
             // ALERT
             $alertStatus  = 'failed';
             $alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
             getAlert($alertStatus, $alertMessage);
-            redirect('admin/dashboard');
+            redirect('user/dashboard');
         }
     }
 
@@ -50,7 +50,7 @@ class Profile extends CI_Controller
                         $alertStatus  = "failed";
                         $alertMessage = "Password baru tidak boleh bernilai kosong";
                         getAlert($alertStatus, $alertMessage);
-                        redirect('admin/profile');
+                        redirect('user/profile');
                         // clean_all_processes();
                     }
                 } else {
@@ -59,7 +59,7 @@ class Profile extends CI_Controller
                     $alertStatus  = "failed";
                     $alertMessage = "Password baru dan konfirmasi tidak cocok";
                     getAlert($alertStatus, $alertMessage);
-                    redirect('admin/profile');
+                    redirect('user/profile');
                     // clean_all_processes();
                 }
             } else {
@@ -68,7 +68,7 @@ class Profile extends CI_Controller
                 $alertStatus  = "failed";
                 $alertMessage = "Password Lama Tidak Sama dengan database";
                 getAlert($alertStatus, $alertMessage);
-                redirect('admin/profile');
+                redirect('user/profile');
                 // clean_all_processes();
             }
         }
@@ -130,6 +130,6 @@ class Profile extends CI_Controller
         $alertMessage = "Berhasil mengubah data profile : " . $data['user_name'];
         getAlert($alertStatus, $alertMessage);
 
-        redirect('admin/profile');
+        redirect('user/profile');
     }
 }
