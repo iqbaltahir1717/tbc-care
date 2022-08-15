@@ -136,18 +136,17 @@
                                 $nox = 1;
                                 $no = 1;
                                 foreach ($data as $ab => $key) {
-
                             ?>
                                     <div class="form-group">
-                                        <label for="text" class="col-sm-2 control-label">Nilai BMR</label>
+                                        <label for="text" class="col-sm-2 control-label">Kebutuhan Kalori</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" placeholder="Nama User" disabled value="<?php echo $key[11]; ?>">
+                                            <input type="number" class="form-control" placeholder="Nama User" disabled value="<?php echo $key[10]; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputName" class="col-sm-2 control-label">Nilai IMT/BMI</label>
                                         <div class="col-sm-10">
-                                            <input type="number" class="form-control" disabled placeholder="Nama User" value="<?php echo  $key[10]; ?>">
+                                            <input type="number" class="form-control" disabled placeholder="" value="<?php echo round($key[15], 2) ?>">
                                         </div>
                                     </div>
                                     <div class="form-group">

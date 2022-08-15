@@ -33,13 +33,16 @@ class Kalkulator extends CI_Controller
 			$today = new DateTime('today');
 			$y = $today->diff($tanggal)->y;
 
+			$user_tb_meter = $p->user_tb / 100;
+			$imt =  ($p->user_bb) / ($user_tb_meter * $user_tb_meter);
+
 			if ($p->user_bb == 0 && $p->user_tb == 0) {
 				$hs = "kosong";
 				$bmr = "-";
 				$data["menu"] = $this->m_food->get(1);
 				$output = "-";
 				$total_akhirs = "-";
-				$data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $hs, $bmr,  $data["menu"], $output, $total_akhirs];
+				$data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $hs, $bmr,  $data["menu"], $output, $total_akhirs, $imt];
 			} else {
 
 				//bmr dan harris benedict berdasar jenis kelamin dan aktifias
@@ -233,7 +236,8 @@ class Kalkulator extends CI_Controller
 				}
 
 
-				$data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $hs, $bmr,  $data["menu"], $output, $total_akhirs];
+
+				$data["data"][] = [$p->user_id, $p->user_fullname, $p->user_gender, $p->user_birth, $p->user_bb, $p->user_tb, $p->user_status, $p->user_email, $p->user_no, $p->user_activity, $hs, $bmr,  $data["menu"], $output, $total_akhirs, $imt];
 			}
 		}
 
